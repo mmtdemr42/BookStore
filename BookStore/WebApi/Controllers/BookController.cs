@@ -57,10 +57,17 @@ namespace WebApi.Controllers
             //var bookList = _context.Books.OrderBy(x => x.Id).ToList<Book>();
             //return bookList;
 
-            GetBooksQuery query = new GetBooksQuery(_context);
-            var result =query.Handle();
-            return Ok(result);
+            try
+            {
+                GetBooksQuery query = new GetBooksQuery(_context);
+                var result = query.Handle();
+                return Ok(result);
+            }
+            catch (Exception exception)
+            {
 
+                return BadRequest(exception.Message);
+            }
         }
 
         //[HttpGet("{id}")]
@@ -121,13 +128,13 @@ namespace WebApi.Controllers
             {
                 createBook.Model = newBook;
                 createBook.Handle();
-                return Ok();
             }
             catch (Exception exception)
             {
 
                 return BadRequest(exception.Message);
             }
+            return Ok();
         }
 
         //[HttpPut("{id}")]
@@ -169,13 +176,12 @@ namespace WebApi.Controllers
             {
                 updateBook1.Model = updateBook;
                 updateBook1.Handle(id);
-                return Ok();
-
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
+            return Ok();
         }
 
 
@@ -210,12 +216,14 @@ namespace WebApi.Controllers
             try
             {
                 deleteBook.Handle(id);
-                    return Ok();
+                 
             }
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
+            return Ok();
+
         }
     }
 }

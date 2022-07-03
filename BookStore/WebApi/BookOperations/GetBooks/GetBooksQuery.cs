@@ -19,6 +19,10 @@ namespace WebApi.BookOperations.GetBooks
         public List<BooksViewModel> Handle()
         {
             var bookList = _bookStoreDbContext.Books.OrderBy(x => x.Id).ToList<Book>();
+            if (bookList is null)
+            {
+                throw new InvalidOperationException("Herhangi bir kitap bulunmadı!");
+            }
             List<BooksViewModel> vm = new List<BooksViewModel>();
             foreach (var book in bookList)
             {
