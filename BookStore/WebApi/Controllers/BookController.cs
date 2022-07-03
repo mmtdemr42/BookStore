@@ -71,10 +71,18 @@ namespace WebApi.Controllers
         //}
 
         [HttpGet("{id}")]
-        public Book GetId(int id)
+        public IActionResult GetId(int id)
         {
-            var book = _context.Books.Where(book => book.Id == id).SingleOrDefault();
-            return book;
+            GetBookQuery getBookQuery = new GetBookQuery(_context);
+            try
+            {
+                var result = getBookQuery.Handle(id);
+                return Ok(result);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         //[HttpGet]

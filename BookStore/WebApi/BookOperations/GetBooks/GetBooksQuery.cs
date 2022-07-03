@@ -26,7 +26,7 @@ namespace WebApi.BookOperations.GetBooks
                 {
                     Title = book.Title,
                     PageCount = book.PageCount,
-                    PublishDate = book.PublishDate.Date.ToString("dd/mm/yyyy"),
+                    PublishDate = book.PublishDate.Date.ToString("dd/MM/yyyy"),
                     Genre = ((GenreEnum)book.GenreId).ToString(),
                 });
             }
