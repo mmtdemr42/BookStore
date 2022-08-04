@@ -22,7 +22,7 @@ namespace WebApi.BookOperations.CreateBook
             var book = _bookStoreDbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
             if (book is not null)
             {
-                 throw new InvalidOperationException("Kitap zaten var");
+                 throw new InvalidOperationException("Kitap zaten var"); 
             }
 
             book = new Book();
